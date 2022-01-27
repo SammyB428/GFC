@@ -7,7 +7,7 @@ Dr. Richard Garwin
 
 The MIT License (MIT)
 
-Copyright (c) 1997-2015 Sam Blackburn
+Copyright (c) 1997-2022 Sam Blackburn
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -30,82 +30,6 @@ SOFTWARE.
 
 #include "GFC.h"
 #pragma hdrstop
-
-CEarthCoordinate::CEarthCoordinate( void )
-{
-   m_X_CoordinateInMeters = 0.0;
-   m_Y_CoordinateInMeters = 0.0;
-   m_Z_CoordinateInMeters = 0.0;
-}
-
-CEarthCoordinate::CEarthCoordinate( const CEarthCoordinate& source )
-{
-   Copy( source );
-}
-
-CEarthCoordinate::~CEarthCoordinate( void )
-{
-   m_X_CoordinateInMeters = 0.0;
-   m_Y_CoordinateInMeters = 0.0;
-   m_Z_CoordinateInMeters = 0.0;
-}
-
-void CEarthCoordinate::Copy( const CEarthCoordinate& source )
-{
-   m_X_CoordinateInMeters = source.m_X_CoordinateInMeters;
-   m_Y_CoordinateInMeters = source.m_Y_CoordinateInMeters;
-   m_Z_CoordinateInMeters = source.m_Z_CoordinateInMeters;
-}
-
-void CEarthCoordinate::Get( double& x_coordinate, double& y_coordinate, double& z_coordinate ) const
-{
-   x_coordinate = m_X_CoordinateInMeters;
-   y_coordinate = m_Y_CoordinateInMeters;
-   z_coordinate = m_Z_CoordinateInMeters;
-}
-
-double CEarthCoordinate::GetXCoordinateInMeters( void ) const
-{
-   return( m_X_CoordinateInMeters );
-}
-
-double CEarthCoordinate::GetYCoordinateInMeters( void ) const
-{
-   return( m_Y_CoordinateInMeters );
-}
-
-double CEarthCoordinate::GetZCoordinateInMeters( void ) const
-{
-   return( m_Z_CoordinateInMeters );
-}
-
-void CEarthCoordinate::Set( double x_coordinate, double y_coordinate, double z_coordinate )
-{
-   m_X_CoordinateInMeters = x_coordinate;
-   m_Y_CoordinateInMeters = y_coordinate;
-   m_Z_CoordinateInMeters = z_coordinate;
-}
-
-void CEarthCoordinate::SetXCoordinateInMeters( double x_coordinate )
-{
-   m_X_CoordinateInMeters = x_coordinate;
-}
-
-void CEarthCoordinate::SetYCoordinateInMeters( double y_coordinate )
-{
-   m_Y_CoordinateInMeters = y_coordinate;
-}
-
-void CEarthCoordinate::SetZCoordinateInMeters( double z_coordinate )
-{
-   m_Z_CoordinateInMeters = z_coordinate;
-}
-
-CEarthCoordinate& CEarthCoordinate::operator=( const CEarthCoordinate& source )
-{
-   Copy( source );
-   return( *this );
-}
 
 #if 0
 <HTML>

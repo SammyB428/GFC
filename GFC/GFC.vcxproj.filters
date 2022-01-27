@@ -15,12 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CEarth.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CMath.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GFC.h">
       <Filter>Header Files</Filter>
     </ClInclude>

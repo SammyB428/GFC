@@ -7,7 +7,7 @@ Dr. Richard Garwin
 
 The MIT License (MIT)
 
-Copyright (c) 1997-2015 Sam Blackburn
+Copyright (c) 1997-2022 Sam Blackburn
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -30,82 +30,6 @@ SOFTWARE.
 
 #include "GFC.h"
 #pragma hdrstop
-
-CPolarCoordinate::CPolarCoordinate( void )
-{
-   m_UpDownAngleInDegrees        = 0.0;
-   m_LeftRightAngleInDegrees     = 0.0;
-   m_DistanceFromSurfaceInMeters = 0.0;
-}
-
-CPolarCoordinate::CPolarCoordinate( const CPolarCoordinate& source )
-{
-   Copy( source );
-}
-
-CPolarCoordinate::~CPolarCoordinate( void )
-{
-   m_UpDownAngleInDegrees        = 0.0;
-   m_LeftRightAngleInDegrees     = 0.0;
-   m_DistanceFromSurfaceInMeters = 0.0;
-}
-
-void CPolarCoordinate::Copy( const CPolarCoordinate& source )
-{
-   m_UpDownAngleInDegrees        = source.m_UpDownAngleInDegrees;
-   m_LeftRightAngleInDegrees     = source.m_LeftRightAngleInDegrees;
-   m_DistanceFromSurfaceInMeters = source.m_DistanceFromSurfaceInMeters;
-}
-
-void CPolarCoordinate::Get( double& up_down_angle, double& left_right_angle, double& length ) const
-{
-   up_down_angle    = m_UpDownAngleInDegrees;
-   left_right_angle = m_LeftRightAngleInDegrees;
-   length           = m_DistanceFromSurfaceInMeters;
-}
-
-double CPolarCoordinate::GetUpDownAngleInDegrees( void ) const
-{
-   return( m_UpDownAngleInDegrees );
-}
-
-double CPolarCoordinate::GetLeftRightAngleInDegrees( void ) const
-{
-   return( m_LeftRightAngleInDegrees );
-}
-
-double CPolarCoordinate::GetDistanceFromSurfaceInMeters( void ) const
-{
-   return( m_DistanceFromSurfaceInMeters );
-}
-
-void CPolarCoordinate::Set( double up_down_angle, double left_right_angle, double length )
-{
-   m_UpDownAngleInDegrees        = up_down_angle;
-   m_LeftRightAngleInDegrees     = left_right_angle;
-   m_DistanceFromSurfaceInMeters = length;
-}
-
-void CPolarCoordinate::SetUpDownAngleInDegrees( double up_down_angle )
-{
-   m_UpDownAngleInDegrees = up_down_angle;
-}
-
-void CPolarCoordinate::SetLeftRightAngleInDegrees( double left_right_angle )
-{
-   m_LeftRightAngleInDegrees = left_right_angle;
-}
-
-void CPolarCoordinate::SetDistanceFromSurfaceInMeters( double distance_from_surface )
-{
-   m_DistanceFromSurfaceInMeters = distance_from_surface;
-}
-
-CPolarCoordinate& CPolarCoordinate::operator=( const CPolarCoordinate& source )
-{
-   Copy( source );
-   return( *this );
-}
 
 #if 0
 <WFC_DOCUMENTATION>

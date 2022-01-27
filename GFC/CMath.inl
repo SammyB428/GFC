@@ -7,7 +7,7 @@ Dr. Richard Garwin
 
 The MIT License (MIT)
 
-Copyright (c) 1997-2015 Sam Blackburn
+Copyright (c) 1997-2022 Sam Blackburn
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,43 +28,46 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-inline double CMath::AbsoluteValue( const double& value )
+inline constexpr [[nodiscard]] double GeodesyFoundationClasses::CMath::Pi(void) noexcept
 {
-   return( ::fabs( value ) );
+    return(3.1415926535897932384626433832795028841971693993751058209749445923078164);
 }
 
-inline double CMath::ArcCosine( const double& value )
+inline [[nodiscard]] double GeodesyFoundationClasses::CMath::AbsoluteValue( double const value ) noexcept
 {
-   return( ::acos( value ) );
+   return( std::fabs( value ) );
 }
 
-inline double CMath::ArcSine( const double& value )
+inline [[nodiscard]] double GeodesyFoundationClasses::CMath::ArcCosine( double const value ) noexcept
 {
-   return( ::asin( value ) );
+   return( std::acos( value ) );
 }
 
-inline double CMath::ArcTangent( const double& value )
+inline [[nodiscard]] double GeodesyFoundationClasses::CMath::ArcSine( double const value ) noexcept
 {
-   return( ::atan( value ) );
+   return( std::asin( value ) );
 }
 
-inline double CMath::ArcTangentOfYOverX( const double& y, const double& x )
+inline [[nodiscard]] double GeodesyFoundationClasses::CMath::ArcTangent( double const value ) noexcept
 {
-   return( ::atan2( y, x ) );
+   return( std::atan( value ) );
 }
 
-inline double CMath::Ceiling( const double& value )
+inline [[nodiscard]] double GeodesyFoundationClasses::CMath::ArcTangentOfYOverX( double const y, double const x ) noexcept
 {
-   return( ::ceil( value ) );
+   return( std::atan2( y, x ) );
 }
 
-inline void CMath::ConvertDecimalDegreesToDegreesMinutesSeconds( double decimal_degrees, double& degrees, double& minutes, double& seconds )
+inline [[nodiscard]] double GeodesyFoundationClasses::CMath::Ceiling( double const value ) noexcept
 {
-   double fractional_part = 0.0;
+   return( std::ceil( value ) );
+}
 
-   double integer_part = 0;
+inline void GeodesyFoundationClasses::CMath::ConvertDecimalDegreesToDegreesMinutesSeconds( double const decimal_degrees, double& degrees, double& minutes, double& seconds ) noexcept
+{
+    double integer_part{ 0.0 };
 
-   fractional_part = ::modf( decimal_degrees, &integer_part );
+   auto fractional_part = std::modf( decimal_degrees, &integer_part );
 
    degrees = integer_part;
 
@@ -75,18 +78,16 @@ inline void CMath::ConvertDecimalDegreesToDegreesMinutesSeconds( double decimal_
 
    minutes = fractional_part * 60.0;
 
-   fractional_part = ::modf( minutes, &integer_part );
+   fractional_part = std::modf( minutes, &integer_part );
 
    minutes = integer_part;
 
    seconds = fractional_part * 60.0;
 }
 
-inline double CMath::ConvertDegreesMinutesSecondsCoordinateToDecimalDegrees( double degrees, double minutes, double seconds )
+inline constexpr [[nodiscard]] double GeodesyFoundationClasses::CMath::ConvertDegreesMinutesSecondsCoordinateToDecimalDegrees( double const degrees, double const minutes, double const seconds ) noexcept
 {
-   double decimal_degrees = 0.0;
-
-   decimal_degrees = degrees;
+   double decimal_degrees{ degrees };
 
    if ( decimal_degrees < 0.0 )
    {
@@ -104,48 +105,40 @@ inline double CMath::ConvertDegreesMinutesSecondsCoordinateToDecimalDegrees( dou
    return( decimal_degrees );
 }
 
-inline double CMath::ConvertDegreesToRadians( const double& degrees )
+inline constexpr [[nodiscard]] double GeodesyFoundationClasses::CMath::ConvertDegreesToRadians( double const degrees ) noexcept
 {
-   double radians           = 0.0;
-   double pi_divided_by_180 = CMath::Pi() / 180.0;
+   double constexpr pi_divided_by_180{ GeodesyFoundationClasses::CMath::Pi() / 180.0 };
    
-   radians = degrees * pi_divided_by_180;
+   auto const radians{ degrees * pi_divided_by_180 };
 
    return( radians );
 }
 
-inline double CMath::ConvertRadiansToDegrees( const double& radians )
+inline constexpr [[nodiscard]] double GeodesyFoundationClasses::CMath::ConvertRadiansToDegrees( double const radians ) noexcept
 {
-   double degrees = 0.0;
+   auto constexpr conversion_factor{ 180.0 / GeodesyFoundationClasses::CMath::Pi() };
 
-   double conversion_factor = 180.0 / CMath::Pi();
-
-   degrees = radians * conversion_factor;
+   auto const degrees{ radians * conversion_factor };
 
    return( degrees );
 }
 
-inline double CMath::Cosine( const double& value )
+inline [[nodiscard]] double GeodesyFoundationClasses::CMath::Cosine( double const value ) noexcept
 {
    return( ::cos( value ) );
 }
 
-inline double CMath::HyperbolicCosine( const double& value )
+inline [[nodiscard]] double GeodesyFoundationClasses::CMath::HyperbolicCosine( double const value ) noexcept
 {
    return( ::cosh( value ) );
 }
 
-inline double CMath::Pi( void )
+inline [[nodiscard]] double GeodesyFoundationClasses::CMath::Sine( double const value ) noexcept
 {
-   return( 3.1415926535897932384626433832795028841971693993751058209749445923078164 );
+   return( std::sin( value ) );
 }
 
-inline double CMath::Sine( const double& value )
+inline [[nodiscard]] double GeodesyFoundationClasses::CMath::SquareRoot( double const value ) noexcept
 {
-   return( ::sin( value ) );
-}
-
-inline double CMath::SquareRoot( const double& value )
-{
-   return( ::sqrt( value ) );
+   return( std::sqrt( value ) );
 }
