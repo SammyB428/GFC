@@ -28,6 +28,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+/* SPDX-License-Identifier: MIT */
+
 inline constexpr [[nodiscard]] double GeodesyFoundationClasses::CMath::Pi(void) noexcept
 {
     return(3.1415926535897932384626433832795028841971693993751058209749445923078164);

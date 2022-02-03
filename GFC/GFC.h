@@ -28,6 +28,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+/* SPDX-License-Identifier: MIT */
+
 // Definitions
 // Ellipsoid
 //  A flattened sphere. Take a basketball (a sphere), let some air out of it then
@@ -475,7 +477,7 @@ namespace GeodesyFoundationClasses
             // optical horizon is 1.317 * sqrt( h );
             // d= ::sqrt( 17 * height_in_meters ); d is in meters
 
-            auto const distance_to_horizon = GeodesyFoundationClasses::CMath::SquareRoot(17.0 * point_1.GetDistanceFromSurfaceInMeters());
+            auto const distance_to_horizon{ GeodesyFoundationClasses::CMath::SquareRoot(17.0 * point_1.GetDistanceFromSurfaceInMeters()) };
 
             return(distance_to_horizon);
         }
