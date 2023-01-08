@@ -56,21 +56,21 @@ void GeodesyFoundationClasses::CEarth::AddLineOfSightDistanceAndDirectionToCoord
    // on the finer points of Geodesy, one of which was how to compute
    // "second eccentricity squared"
 
-   double const polar_eccentricity_squared  = ( ( m_EquatorialRadiusInMeters * m_EquatorialRadiusInMeters ) - ( m_PolarRadiusInMeters * m_PolarRadiusInMeters ) ) / ( m_PolarRadiusInMeters * m_PolarRadiusInMeters );
-   double const point_1_latitude_in_radians = GeodesyFoundationClasses::CMath::ConvertDegreesToRadians( point_1.GetUpDownAngleInDegrees() );
-   double const direction_in_radians        = GeodesyFoundationClasses::CMath::ConvertDegreesToRadians( direction );
-   double const cosine_of_point_1_latitude  = GeodesyFoundationClasses::CMath::Cosine( point_1_latitude_in_radians );
-   double const cosine_of_latitude_squared  = cosine_of_point_1_latitude * cosine_of_point_1_latitude;
-   double const cosine_of_direction_squared = GeodesyFoundationClasses::CMath::Cosine( direction_in_radians ) * GeodesyFoundationClasses::CMath::Cosine( direction_in_radians );
-   double const c = ( m_EquatorialRadiusInMeters * m_EquatorialRadiusInMeters ) / m_PolarRadiusInMeters;
-   double const n = c / GeodesyFoundationClasses::CMath::SquareRoot( 1.0 + ( polar_eccentricity_squared * cosine_of_latitude_squared ) );
-   double const r = n / ( 1.0 + ( polar_eccentricity_squared * cosine_of_latitude_squared * cosine_of_direction_squared ) );
+   double const polar_eccentricity_squared{ ((m_EquatorialRadiusInMeters * m_EquatorialRadiusInMeters) - (m_PolarRadiusInMeters * m_PolarRadiusInMeters)) / (m_PolarRadiusInMeters * m_PolarRadiusInMeters) };
+   double const point_1_latitude_in_radians{ GeodesyFoundationClasses::CMath::ConvertDegreesToRadians(point_1.GetUpDownAngleInDegrees()) };
+   double const direction_in_radians{ GeodesyFoundationClasses::CMath::ConvertDegreesToRadians(direction) };
+   double const cosine_of_point_1_latitude{ GeodesyFoundationClasses::CMath::Cosine(point_1_latitude_in_radians) };
+   double const cosine_of_latitude_squared{ cosine_of_point_1_latitude * cosine_of_point_1_latitude };
+   double const cosine_of_direction_squared{ GeodesyFoundationClasses::CMath::Cosine(direction_in_radians) * GeodesyFoundationClasses::CMath::Cosine(direction_in_radians) };
+   double const c{ ( m_EquatorialRadiusInMeters * m_EquatorialRadiusInMeters ) / m_PolarRadiusInMeters};
+   double const n{ c / GeodesyFoundationClasses::CMath::SquareRoot(1.0 + (polar_eccentricity_squared * cosine_of_latitude_squared)) };
+   double const r{ n / (1.0 + (polar_eccentricity_squared * cosine_of_latitude_squared * cosine_of_direction_squared)) };
    double const height_above_surface_of_point_1{ point_1.GetDistanceFromSurfaceInMeters() };
-   double const difference_in_height = height_above_surface_of_point_2 - height_above_surface_of_point_1;
-   double const term_1 = ( distance * distance ) - ( difference_in_height * difference_in_height );
-   double const term_2 = 1.0 + ( height_above_surface_of_point_1 / r );
-   double const term_3 = 1.0 + ( height_above_surface_of_point_2 / r );
-   double const distance_adjusted_for_differences_in_height = GeodesyFoundationClasses::CMath::SquareRoot( term_1 / ( term_2 * term_3 ) );
+   double const difference_in_height{ height_above_surface_of_point_2 - height_above_surface_of_point_1 };
+   double const term_1{ (distance * distance) - (difference_in_height * difference_in_height) };
+   double const term_2{ 1.0 + (height_above_surface_of_point_1 / r) };
+   double const term_3{ 1.0 + (height_above_surface_of_point_2 / r) };
+   double const distance_adjusted_for_differences_in_height{ GeodesyFoundationClasses::CMath::SquareRoot(term_1 / (term_2 * term_3)) };
 
    // printf( "distance_adjusted_for_differences_in_height is %.11lf\n", distance_adjusted_for_differences_in_height );
 
@@ -129,7 +129,7 @@ void GeodesyFoundationClasses::CEarth::AddSurfaceDistanceAndDirectionToCoordinat
    double y{ 0.0 };
 
    double const direction_in_radians{ GeodesyFoundationClasses::CMath::ConvertDegreesToRadians(direction) };
-   double const eps{ 0.000000000000005 };
+   constexpr double const eps{ 0.000000000000005 };
    double const r{ 1.0 - m_Flattening };
    double const point_1_latitude_in_radians{ GeodesyFoundationClasses::CMath::ConvertDegreesToRadians(point_1.GetUpDownAngleInDegrees()) };
    double const point_1_longitude_in_radians{ GeodesyFoundationClasses::CMath::ConvertDegreesToRadians(point_1.GetLeftRightAngleInDegrees()) };
@@ -140,7 +140,7 @@ void GeodesyFoundationClasses::CEarth::AddSurfaceDistanceAndDirectionToCoordinat
    double const cosine_of_direction{ GeodesyFoundationClasses::CMath::Cosine(direction_in_radians) };
    double heading_from_point_2_to_point_1_in_radians{ 0.0 };
 
-   if ( cosine_of_direction != 0.0 )
+   if ( cosine_of_direction not_eq 0.0 )
    {
       heading_from_point_2_to_point_1_in_radians = GeodesyFoundationClasses::CMath::ArcTangentOfYOverX( tangent_u, cosine_of_direction ) * 2.0;
    }
@@ -161,7 +161,7 @@ void GeodesyFoundationClasses::CEarth::AddSurfaceDistanceAndDirectionToCoordinat
 
    bool exit_loop{ false };
 
-   while( exit_loop != true )
+   while( exit_loop not_eq true )
    {
       sine_of_y = GeodesyFoundationClasses::CMath::Sine( y );
       cosine_of_y = GeodesyFoundationClasses::CMath::Cosine( y );
@@ -215,7 +215,7 @@ void GeodesyFoundationClasses::CEarth::Convert( GeodesyFoundationClasses::CEarth
    auto const p{ CMath::SquareRoot((cartesian_coordinate.GetXCoordinateInMeters() * cartesian_coordinate.GetXCoordinateInMeters()) +
                                    (cartesian_coordinate.GetYCoordinateInMeters() * cartesian_coordinate.GetYCoordinateInMeters())) };
 
-   double z_coordinate{ cartesian_coordinate.GetZCoordinateInMeters() }; // for convienance
+   auto z_coordinate{ cartesian_coordinate.GetZCoordinateInMeters() }; // for convienance
    double const one_minus_eccentricity_squared{ 1.0 - m_EccentricitySquared };
 
    double temp_latitude{ z_coordinate / p / one_minus_eccentricity_squared };
@@ -230,7 +230,7 @@ void GeodesyFoundationClasses::CEarth::Convert( GeodesyFoundationClasses::CEarth
 
    bool convergence_was_acheived{ false };
 
-   while( convergence_was_acheived != true && loop_index < maximum_number_of_tries )
+   while( convergence_was_acheived not_eq true and loop_index < maximum_number_of_tries )
    {
       old_value = temp_latitude;
 
@@ -257,13 +257,13 @@ void GeodesyFoundationClasses::CEarth::Convert( GeodesyFoundationClasses::CEarth
    {
       // Save the UpDown angle in degrees
       
-      double const latitude_angle_in_radians{ GeodesyFoundationClasses::CMath::ArcTangent(temp_latitude) };
+      auto const latitude_angle_in_radians{ GeodesyFoundationClasses::CMath::ArcTangent(temp_latitude) };
 
       polar_coordinate.SetUpDownAngleInDegrees(GeodesyFoundationClasses::CMath::ConvertRadiansToDegrees( latitude_angle_in_radians ) ); // Latitude
 
-      double const sine_of_latitude_in_radians{ GeodesyFoundationClasses::CMath::Sine(latitude_angle_in_radians) };
-      double const cosine_of_latitude_in_radians{ GeodesyFoundationClasses::CMath::Cosine(latitude_angle_in_radians) };
-      double const longitude_in_radians{ GeodesyFoundationClasses::CMath::ArcTangentOfYOverX(cartesian_coordinate.GetYCoordinateInMeters(), cartesian_coordinate.GetXCoordinateInMeters()) };
+      auto const sine_of_latitude_in_radians{ GeodesyFoundationClasses::CMath::Sine(latitude_angle_in_radians) };
+      auto const cosine_of_latitude_in_radians{ GeodesyFoundationClasses::CMath::Cosine(latitude_angle_in_radians) };
+      auto const longitude_in_radians{ GeodesyFoundationClasses::CMath::ArcTangentOfYOverX(cartesian_coordinate.GetYCoordinateInMeters(), cartesian_coordinate.GetXCoordinateInMeters()) };
 
       polar_coordinate.SetLeftRightAngleInDegrees(GeodesyFoundationClasses::CMath::ConvertRadiansToDegrees( longitude_in_radians ) ); // Longitude
 
@@ -318,7 +318,7 @@ void GeodesyFoundationClasses::CEarth::Convert( GeodesyFoundationClasses::CPolar
 
 void GeodesyFoundationClasses::CEarth::Copy( GeodesyFoundationClasses::CEarth const& source ) noexcept
 {
-   if ( &source != this )
+   if ( &source not_eq this )
    {
       m_PolarRadiusInMeters      = source.m_PolarRadiusInMeters;
       m_EquatorialRadiusInMeters = source.m_EquatorialRadiusInMeters;
@@ -394,7 +394,7 @@ double GeodesyFoundationClasses::CEarth::GetLineOfSightDistance( GeodesyFoundati
    y_coordinate *= y_coordinate;
    z_coordinate *= z_coordinate;
 
-   auto const distance = CMath::SquareRoot( x_coordinate + y_coordinate + z_coordinate );
+   auto const distance{ CMath::SquareRoot(x_coordinate + y_coordinate + z_coordinate) };
 
    return( distance );
 }
@@ -508,7 +508,7 @@ double GeodesyFoundationClasses::CEarth::GetSurfaceDistance( GeodesyFoundationCl
 
    bool exit_loop{ false };
 
-   while( exit_loop != true )
+   while( exit_loop not_eq true )
    {
       sine_of_x   = GeodesyFoundationClasses::CMath::Sine( x );
       cosine_of_x = GeodesyFoundationClasses::CMath::Cosine( x );
@@ -521,7 +521,7 @@ double GeodesyFoundationClasses::CEarth::GetSurfaceDistance( GeodesyFoundationCl
       // Thanks to John Werner (werner@tij.wb.xerox.com) for
       // finding a bug where sy could be zero. Here's his fix:
 
-      if ( ( s * sine_of_x ) == 0.0 && ( sy == 0.0 ) )
+      if ( ( s * sine_of_x ) == 0.0 and ( sy == 0.0 ) )
       {
          sa = 1.0;
       }
@@ -544,7 +544,7 @@ double GeodesyFoundationClasses::CEarth::GetSurfaceDistance( GeodesyFoundationCl
       x = ( ( ( ( e * cy * c ) + cz ) * sy * c ) + y ) * sa;
       x = ( ( 1.0 - c ) * x * m_Flattening ) + point_2_longitude_in_radians - point_1_longitude_in_radians;
 
-      if (GeodesyFoundationClasses::CMath::AbsoluteValue( d - x ) > 0.00000000000000000000005 && x != last_value_of_d )
+      if (GeodesyFoundationClasses::CMath::AbsoluteValue( d - x ) > 0.00000000000000000000005 and x not_eq last_value_of_d )
       {
          exit_loop = false;
          last_value_of_d = d;
@@ -564,7 +564,7 @@ double GeodesyFoundationClasses::CEarth::GetSurfaceDistance( GeodesyFoundationCl
       temp_decimal_degrees += 360.0;
    }
 
-   if ( heading_from_point_1_to_point_2_p != nullptr )
+   if ( heading_from_point_1_to_point_2_p not_eq nullptr )
    {
       // The user passed us a pointer, don't trust it.
       // If you are using Visual C++ on Windows NT, the following
@@ -591,7 +591,7 @@ double GeodesyFoundationClasses::CEarth::GetSurfaceDistance( GeodesyFoundationCl
       temp_decimal_degrees += 360.0;
    }
 
-   if ( heading_from_point_2_to_point_1_p != nullptr)
+   if ( heading_from_point_2_to_point_1_p not_eq nullptr)
    {
       // The user passed us a pointer, don't trust it.
       // If you are using Visual C++ on Windows NT, the following
@@ -646,7 +646,7 @@ void GeodesyFoundationClasses::CEarth::m_ComputeEccentricitySquared( void ) noex
 
 void GeodesyFoundationClasses::CEarth::m_ComputeFlattening( void ) noexcept
 {
-   if ( m_EquatorialRadiusInMeters == 0.0 || m_PolarRadiusInMeters == 0.0 )
+   if ( m_EquatorialRadiusInMeters == 0.0 or m_PolarRadiusInMeters == 0.0 )
    {
       return;
    }

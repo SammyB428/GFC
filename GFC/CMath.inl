@@ -30,46 +30,46 @@ SOFTWARE.
 
 /* SPDX-License-Identifier: MIT */
 
-inline constexpr [[nodiscard]] double GeodesyFoundationClasses::CMath::Pi(void) noexcept
+[[nodiscard]] inline constexpr double GeodesyFoundationClasses::CMath::Pi(void) noexcept
 {
     return(3.1415926535897932384626433832795028841971693993751058209749445923078164);
 }
 
-inline [[nodiscard]] double GeodesyFoundationClasses::CMath::AbsoluteValue( double const value ) noexcept
+[[nodiscard]] inline double GeodesyFoundationClasses::CMath::AbsoluteValue( double const value ) noexcept
 {
    return( std::fabs( value ) );
 }
 
-inline [[nodiscard]] double GeodesyFoundationClasses::CMath::ArcCosine( double const value ) noexcept
+[[nodiscard]] inline double GeodesyFoundationClasses::CMath::ArcCosine( double const value ) noexcept
 {
    return( std::acos( value ) );
 }
 
-inline [[nodiscard]] double GeodesyFoundationClasses::CMath::ArcSine( double const value ) noexcept
+[[nodiscard]] inline double GeodesyFoundationClasses::CMath::ArcSine( double const value ) noexcept
 {
    return( std::asin( value ) );
 }
 
-inline [[nodiscard]] double GeodesyFoundationClasses::CMath::ArcTangent( double const value ) noexcept
+[[nodiscard]] inline double GeodesyFoundationClasses::CMath::ArcTangent( double const value ) noexcept
 {
    return( std::atan( value ) );
 }
 
-inline [[nodiscard]] double GeodesyFoundationClasses::CMath::ArcTangentOfYOverX( double const y, double const x ) noexcept
+[[nodiscard]] inline double GeodesyFoundationClasses::CMath::ArcTangentOfYOverX( double const y, double const x ) noexcept
 {
    return( std::atan2( y, x ) );
 }
 
-inline [[nodiscard]] double GeodesyFoundationClasses::CMath::Ceiling( double const value ) noexcept
+[[nodiscard]] inline double GeodesyFoundationClasses::CMath::Ceiling( double const value ) noexcept
 {
    return( std::ceil( value ) );
 }
 
 inline void GeodesyFoundationClasses::CMath::ConvertDecimalDegreesToDegreesMinutesSeconds( double const decimal_degrees, double& degrees, double& minutes, double& seconds ) noexcept
 {
-    double integer_part{ 0.0 };
+   double integer_part{ 0.0 };
 
-   auto fractional_part = std::modf( decimal_degrees, &integer_part );
+   auto fractional_part{ std::modf(decimal_degrees, &integer_part) };
 
    degrees = integer_part;
 
@@ -87,7 +87,7 @@ inline void GeodesyFoundationClasses::CMath::ConvertDecimalDegreesToDegreesMinut
    seconds = fractional_part * 60.0;
 }
 
-inline constexpr [[nodiscard]] double GeodesyFoundationClasses::CMath::ConvertDegreesMinutesSecondsCoordinateToDecimalDegrees( double const degrees, double const minutes, double const seconds ) noexcept
+[[nodiscard]] inline constexpr double GeodesyFoundationClasses::CMath::ConvertDegreesMinutesSecondsCoordinateToDecimalDegrees( double const degrees, double const minutes, double const seconds ) noexcept
 {
    double decimal_degrees{ degrees };
 
@@ -107,40 +107,40 @@ inline constexpr [[nodiscard]] double GeodesyFoundationClasses::CMath::ConvertDe
    return( decimal_degrees );
 }
 
-inline constexpr [[nodiscard]] double GeodesyFoundationClasses::CMath::ConvertDegreesToRadians( double const degrees ) noexcept
+[[nodiscard]] inline constexpr double GeodesyFoundationClasses::CMath::ConvertDegreesToRadians( double const degrees ) noexcept
 {
-   double constexpr pi_divided_by_180{ GeodesyFoundationClasses::CMath::Pi() / 180.0 };
+   constexpr double const pi_divided_by_180{ GeodesyFoundationClasses::CMath::Pi() / 180.0 };
    
    auto const radians{ degrees * pi_divided_by_180 };
 
    return( radians );
 }
 
-inline constexpr [[nodiscard]] double GeodesyFoundationClasses::CMath::ConvertRadiansToDegrees( double const radians ) noexcept
+[[nodiscard]] inline constexpr double GeodesyFoundationClasses::CMath::ConvertRadiansToDegrees( double const radians ) noexcept
 {
-   auto constexpr conversion_factor{ 180.0 / GeodesyFoundationClasses::CMath::Pi() };
+   constexpr auto const conversion_factor{ 180.0 / GeodesyFoundationClasses::CMath::Pi() };
 
    auto const degrees{ radians * conversion_factor };
 
    return( degrees );
 }
 
-inline [[nodiscard]] double GeodesyFoundationClasses::CMath::Cosine( double const value ) noexcept
+[[nodiscard]] inline double GeodesyFoundationClasses::CMath::Cosine( double const value ) noexcept
 {
    return( ::cos( value ) );
 }
 
-inline [[nodiscard]] double GeodesyFoundationClasses::CMath::HyperbolicCosine( double const value ) noexcept
+[[nodiscard]] inline double GeodesyFoundationClasses::CMath::HyperbolicCosine( double const value ) noexcept
 {
    return( ::cosh( value ) );
 }
 
-inline [[nodiscard]] double GeodesyFoundationClasses::CMath::Sine( double const value ) noexcept
+[[nodiscard]] inline double GeodesyFoundationClasses::CMath::Sine( double const value ) noexcept
 {
    return( std::sin( value ) );
 }
 
-inline [[nodiscard]] double GeodesyFoundationClasses::CMath::SquareRoot( double const value ) noexcept
+[[nodiscard]] inline double GeodesyFoundationClasses::CMath::SquareRoot( double const value ) noexcept
 {
    return( std::sqrt( value ) );
 }

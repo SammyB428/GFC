@@ -168,22 +168,22 @@ namespace GeodesyFoundationClasses
 
         public:
 
-        static inline [[nodiscard]] double AbsoluteValue(double const value) noexcept;
-        static inline [[nodiscard]] double ArcCosine(double const value) noexcept;
-        static inline [[nodiscard]] double ArcSine(double const value) noexcept;
-        static inline [[nodiscard]] double ArcTangent(double const value) noexcept;
-        static inline [[nodiscard]] double ArcTangentOfYOverX(double const y, double const x) noexcept;
-        static inline [[nodiscard]] double Ceiling(double const value) noexcept;
-        static inline constexpr [[nodiscard]] double ConvertDegreesToRadians(double const degrees) noexcept;
-        static inline constexpr [[nodiscard]] double ConvertRadiansToDegrees(double const radians) noexcept;
+        [[nodiscard]] static inline double AbsoluteValue(double const value) noexcept;
+        [[nodiscard]] static inline double ArcCosine(double const value) noexcept;
+        [[nodiscard]] static inline double ArcSine(double const value) noexcept;
+        [[nodiscard]] static inline double ArcTangent(double const value) noexcept;
+        [[nodiscard]] static inline double ArcTangentOfYOverX(double const y, double const x) noexcept;
+        [[nodiscard]] static inline double Ceiling(double const value) noexcept;
+        [[nodiscard]] static inline constexpr double ConvertDegreesToRadians(double const degrees) noexcept;
+        [[nodiscard]] static inline constexpr double ConvertRadiansToDegrees(double const radians) noexcept;
         static inline void ConvertDecimalDegreesToDegreesMinutesSeconds(double const decimal_degrees, double& degrees, double& minutes, double& seconds) noexcept;
         // West is negative, East is positive, North is positive, south is negative
-        static inline constexpr [[nodiscard]] double ConvertDegreesMinutesSecondsCoordinateToDecimalDegrees(double const degrees, double const minutes, double const seconds) noexcept;
-        static inline [[nodiscard]] double Cosine(double const value) noexcept;
-        static inline [[nodiscard]] double HyperbolicCosine(double const value) noexcept;
-        static inline constexpr [[nodiscard]] double Pi(void) noexcept;
-        static inline [[nodiscard]] double Sine(double const value) noexcept;
-        static inline [[nodiscard]] double SquareRoot(double const value) noexcept;
+        [[nodiscard]] static inline constexpr double ConvertDegreesMinutesSecondsCoordinateToDecimalDegrees(double const degrees, double const minutes, double const seconds) noexcept;
+        [[nodiscard]] static inline double Cosine(double const value) noexcept;
+        [[nodiscard]] static inline double HyperbolicCosine(double const value) noexcept;
+        [[nodiscard]] static inline constexpr double Pi(void) noexcept;
+        [[nodiscard]] static inline double Sine(double const value) noexcept;
+        [[nodiscard]] static inline double SquareRoot(double const value) noexcept;
     };
 
 #include "CMath.inl" // Implementations of the inline functions
@@ -228,17 +228,17 @@ namespace GeodesyFoundationClasses
             z_coordinate = m_Z_CoordinateInMeters;
         }
 
-        inline constexpr [[nodiscard]] double GetXCoordinateInMeters(void) const noexcept
+        [[nodiscard]] inline constexpr double GetXCoordinateInMeters(void) const noexcept
         {
             return(m_X_CoordinateInMeters);
         }
 
-        inline constexpr [[nodiscard]] double GetYCoordinateInMeters(void) const noexcept
+        [[nodiscard]] inline constexpr double GetYCoordinateInMeters(void) const noexcept
         {
             return(m_Y_CoordinateInMeters);
         }
 
-        inline constexpr [[nodiscard]] double GetZCoordinateInMeters(void) const noexcept
+        [[nodiscard]] inline constexpr double GetZCoordinateInMeters(void) const noexcept
         {
             return(m_Z_CoordinateInMeters);
         }
@@ -310,32 +310,32 @@ namespace GeodesyFoundationClasses
             distance_from_surface = m_DistanceFromSurfaceInMeters;
         }
 
-        inline constexpr [[nodiscard]] double GetUpDownAngleInDegrees(void) const
+        [[nodiscard]] inline constexpr double GetUpDownAngleInDegrees(void) const
         {
             return(m_UpDownAngleInDegrees);
         }
 
-        inline constexpr [[nodiscard]] double GetLatitude(void) const
+        [[nodiscard]] inline constexpr double GetLatitude(void) const
         {
             return(GetUpDownAngleInDegrees());
         }
 
-        inline constexpr [[nodiscard]] double GetLeftRightAngleInDegrees(void) const noexcept
+        [[nodiscard]] inline constexpr double GetLeftRightAngleInDegrees(void) const noexcept
         {
             return(m_LeftRightAngleInDegrees);
         }
 
-        inline constexpr [[nodiscard]] double GetLongitude(void) const
+        [[nodiscard]] inline constexpr double GetLongitude(void) const
         {
             return(GetLeftRightAngleInDegrees());
         }
 
-        inline constexpr [[nodiscard]] double GetDistanceFromSurfaceInMeters(void) const noexcept
+        [[nodiscard]] inline constexpr double GetDistanceFromSurfaceInMeters(void) const noexcept
         {
             return(m_DistanceFromSurfaceInMeters);
         }
 
-        inline constexpr [[nodiscard]] double GetAltitudeInMeters(void) const
+        [[nodiscard]] inline constexpr double GetAltitudeInMeters(void) const
         {
             return(GetDistanceFromSurfaceInMeters());
         }
@@ -455,14 +455,14 @@ namespace GeodesyFoundationClasses
         CEarth(CEarth const& source);
         ~CEarth() = default;
 
-        void   AddLineOfSightDistanceAndDirectionToCoordinate(CPolarCoordinate const& point_1, double const distance, double const direction, CPolarCoordinate& point_2, double const height_above_surface_of_point_2 = 0.0) noexcept;
-        void   AddSurfaceDistanceAndDirectionToCoordinate(CEarthCoordinate const& point_1, double const distance, double const direction, CEarthCoordinate& point_2) noexcept;
-        void   AddSurfaceDistanceAndDirectionToCoordinate(CEarthCoordinate const& point_1, double const distance, double const direction, CPolarCoordinate& point_2) noexcept;
-        void   AddSurfaceDistanceAndDirectionToCoordinate(CPolarCoordinate const& point_1, double const distance, double const direction, CEarthCoordinate& point_2) noexcept;
-        void   AddSurfaceDistanceAndDirectionToCoordinate(CPolarCoordinate const& point_1, double const distance, double const direction, CPolarCoordinate& point_2) noexcept;
-        void   Convert(CEarthCoordinate const& cartesian_coordinate, CPolarCoordinate& polar_coordinate) const noexcept;
-        void   Convert(CPolarCoordinate const& polar_coordinate, CEarthCoordinate& cartesian_coordinate) const noexcept;
-        inline [[nodiscard]] double GetDistanceToHorizon(CEarthCoordinate const& point_1) const noexcept
+        void AddLineOfSightDistanceAndDirectionToCoordinate(CPolarCoordinate const& point_1, double const distance, double const direction, CPolarCoordinate& point_2, double const height_above_surface_of_point_2 = 0.0) noexcept;
+        void AddSurfaceDistanceAndDirectionToCoordinate(CEarthCoordinate const& point_1, double const distance, double const direction, CEarthCoordinate& point_2) noexcept;
+        void AddSurfaceDistanceAndDirectionToCoordinate(CEarthCoordinate const& point_1, double const distance, double const direction, CPolarCoordinate& point_2) noexcept;
+        void AddSurfaceDistanceAndDirectionToCoordinate(CPolarCoordinate const& point_1, double const distance, double const direction, CEarthCoordinate& point_2) noexcept;
+        void AddSurfaceDistanceAndDirectionToCoordinate(CPolarCoordinate const& point_1, double const distance, double const direction, CPolarCoordinate& point_2) noexcept;
+        void Convert(CEarthCoordinate const& cartesian_coordinate, CPolarCoordinate& polar_coordinate) const noexcept;
+        void Convert(CPolarCoordinate const& polar_coordinate, CEarthCoordinate& cartesian_coordinate) const noexcept;
+        [[nodiscard]] inline double GetDistanceToHorizon(CEarthCoordinate const& point_1) const noexcept
         {
             CPolarCoordinate polar_coordinate;
 
@@ -471,7 +471,7 @@ namespace GeodesyFoundationClasses
             return(GetDistanceToHorizon(polar_coordinate));
         }
 
-        inline [[nodiscard]] double GetDistanceToHorizon(CPolarCoordinate const& point_1) const noexcept
+        [[nodiscard]] inline double GetDistanceToHorizon(CPolarCoordinate const& point_1) const noexcept
         {
             // d = ::sqrt( feet ) *  1.144 for nmi
             // optical horizon is 1.317 * sqrt( h );
@@ -482,12 +482,12 @@ namespace GeodesyFoundationClasses
             return(distance_to_horizon);
         }
 
-        inline constexpr [[nodiscard]] double GetEquatorialRadiusInMeters(void) const noexcept
+        [[nodiscard]] inline constexpr double GetEquatorialRadiusInMeters(void) const noexcept
         {
             return(m_EquatorialRadiusInMeters);
         }
 
-        inline constexpr [[nodiscard]] double GetPolarRadiusInMeters(void) const noexcept
+        [[nodiscard]] inline constexpr double GetPolarRadiusInMeters(void) const noexcept
         {
             return(m_PolarRadiusInMeters);
         }
@@ -501,11 +501,11 @@ namespace GeodesyFoundationClasses
         [[nodiscard]] double GetSurfaceDistance(CEarthCoordinate const& point_1, CPolarCoordinate const& point_2, double* heading_from_point_1_to_point_2 = nullptr, double* heading_from_point_2_to_point_1 = nullptr) const noexcept;
         [[nodiscard]] double GetSurfaceDistance(CPolarCoordinate const& point_1, CEarthCoordinate const& point_2, double* heading_from_point_1_to_point_2 = nullptr, double* heading_from_point_2_to_point_1 = nullptr) const noexcept;
         [[nodiscard]] double GetSurfaceDistance(CPolarCoordinate const& point_1, CPolarCoordinate const& point_2, double* heading_from_point_1_to_point_2 = nullptr, double* heading_from_point_2_to_point_1 = nullptr) const noexcept;
-        void   SetEllipsoid(Ellipsoid const ellipsoid) noexcept;
-        void   SetEllipsoidByRadii(double const equatorial_radius, double const polar_radius) noexcept;
-        void   SetEllipsoidByEquatorialRadiusAndFlattening(double const equatorial_radius, double const flattening) noexcept;
+        void SetEllipsoid(Ellipsoid const ellipsoid) noexcept;
+        void SetEllipsoidByRadii(double const equatorial_radius, double const polar_radius) noexcept;
+        void SetEllipsoidByEquatorialRadiusAndFlattening(double const equatorial_radius, double const flattening) noexcept;
 
-        void   Copy(CEarth const& source) noexcept;
+        void Copy(CEarth const& source) noexcept;
         CEarth& operator = (CEarth const& source);
     };
 }
