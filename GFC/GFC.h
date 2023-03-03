@@ -7,7 +7,7 @@ Dr. Richard Garwin
 
 The MIT License (MIT)
 
-Copyright (c) 1997-2022 Sam Blackburn
+Copyright (c) 1997-2023 Sam Blackburn
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -155,7 +155,7 @@ SOFTWARE.
 //
 // While this will give you distance, it will not give you direction.
 
-#include <stdint.h>
+#include <cstdint>
 #include <cmath>
 
 namespace GeodesyFoundationClasses

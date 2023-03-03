@@ -7,7 +7,7 @@ Dr. Richard Garwin
 
 The MIT License (MIT)
 
-Copyright (c) 1997-2022 Sam Blackburn
+Copyright (c) 1997-2023 Sam Blackburn
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -127,12 +127,12 @@ inline void GeodesyFoundationClasses::CMath::ConvertDecimalDegreesToDegreesMinut
 
 [[nodiscard]] inline double GeodesyFoundationClasses::CMath::Cosine( double const value ) noexcept
 {
-   return( ::cos( value ) );
+   return( std::cos( value ) );
 }
 
 [[nodiscard]] inline double GeodesyFoundationClasses::CMath::HyperbolicCosine( double const value ) noexcept
 {
-   return( ::cosh( value ) );
+   return( std::cosh( value ) );
 }
 
 [[nodiscard]] inline double GeodesyFoundationClasses::CMath::Sine( double const value ) noexcept
