@@ -7,7 +7,7 @@ Dr. Richard Garwin
 
 The MIT License (MIT)
 
-Copyright (c) 1997-2023 Sam Blackburn
+Copyright (c) 1997-2026 Sam Blackburn
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,11 +29,6 @@ SOFTWARE.
 */
 
 /* SPDX-License-Identifier: MIT */
-
-[[nodiscard]] inline constexpr double GeodesyFoundationClasses::CMath::Pi(void) noexcept
-{
-    return(3.1415926535897932384626433832795028841971693993751058209749445923078164);
-}
 
 [[nodiscard]] inline double GeodesyFoundationClasses::CMath::AbsoluteValue( double const value ) noexcept
 {
@@ -109,7 +104,7 @@ inline void GeodesyFoundationClasses::CMath::ConvertDecimalDegreesToDegreesMinut
 
 [[nodiscard]] inline constexpr double GeodesyFoundationClasses::CMath::ConvertDegreesToRadians( double const degrees ) noexcept
 {
-   constexpr double const pi_divided_by_180{ GeodesyFoundationClasses::CMath::Pi() / 180.0 };
+   constexpr double const pi_divided_by_180{ std::numbers::pi / 180.0 };
    
    auto const radians{ degrees * pi_divided_by_180 };
 
@@ -118,7 +113,7 @@ inline void GeodesyFoundationClasses::CMath::ConvertDecimalDegreesToDegreesMinut
 
 [[nodiscard]] inline constexpr double GeodesyFoundationClasses::CMath::ConvertRadiansToDegrees( double const radians ) noexcept
 {
-   constexpr auto const conversion_factor{ 180.0 / GeodesyFoundationClasses::CMath::Pi() };
+   constexpr auto const conversion_factor{ 180.0 / std::numbers::pi };
 
    auto const degrees{ radians * conversion_factor };
 

@@ -7,7 +7,7 @@ Dr. Richard Garwin
 
 The MIT License (MIT)
 
-Copyright (c) 1997-2023 Sam Blackburn
+Copyright (c) 1997-2026 Sam Blackburn
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -158,6 +158,8 @@ SOFTWARE.
 #include <cstdint>
 #include <cmath>
 
+#include <numbers> // for pi
+
 namespace GeodesyFoundationClasses
 {
     class CMath
@@ -181,7 +183,6 @@ namespace GeodesyFoundationClasses
         [[nodiscard]] static inline constexpr double ConvertDegreesMinutesSecondsCoordinateToDecimalDegrees(double const degrees, double const minutes, double const seconds) noexcept;
         [[nodiscard]] static inline double Cosine(double const value) noexcept;
         [[nodiscard]] static inline double HyperbolicCosine(double const value) noexcept;
-        [[nodiscard]] static inline constexpr double Pi(void) noexcept;
         [[nodiscard]] static inline double Sine(double const value) noexcept;
         [[nodiscard]] static inline double SquareRoot(double const value) noexcept;
     };
@@ -202,9 +203,6 @@ namespace GeodesyFoundationClasses
 
         CEarthCoordinate() noexcept
         {
-            m_X_CoordinateInMeters = 0.0;
-            m_Y_CoordinateInMeters = 0.0;
-            m_Z_CoordinateInMeters = 0.0;
         }
 
         CEarthCoordinate(CEarthCoordinate const& source) noexcept
@@ -284,9 +282,6 @@ namespace GeodesyFoundationClasses
 
         CPolarCoordinate() noexcept
         {
-            m_UpDownAngleInDegrees = 0.0;
-            m_LeftRightAngleInDegrees = 0.0;
-            m_DistanceFromSurfaceInMeters = 0.0;
         }
 
         CPolarCoordinate(CPolarCoordinate const& source) noexcept
@@ -446,8 +441,26 @@ namespace GeodesyFoundationClasses
         Ellipsoid m_EllipsoidID{ Ellipsoid::Unknown };
 
         void m_ComputeFlattening(void) noexcept;
-        void m_ComputeEccentricitySquared(void) noexcept;
-        void m_Initialize(void) noexcept;
+
+        constexpr inline void m_ComputeEccentricitySquared(void) noexcept
+        {
+            if (m_Flattening == 0.0)
+            {
+                m_EccentricitySquared = 0.0;
+                return;
+            }
+
+            m_EccentricitySquared = (2.0 * m_Flattening) - (m_Flattening * m_Flattening);
+        }
+
+        constexpr inline void m_Initialize(void) noexcept
+        {
+            m_EllipsoidID = Ellipsoid::Unknown;
+            m_PolarRadiusInMeters = 0.0;
+            m_EquatorialRadiusInMeters = 0.0;
+            m_Flattening = 0.0;
+            m_EccentricitySquared = 0.0;
+        }
 
         public:
 

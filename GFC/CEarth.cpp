@@ -7,7 +7,7 @@ Dr. Richard Garwin
 
 The MIT License (MIT)
 
-Copyright (c) 1997-2023 Sam Blackburn
+Copyright (c) 1997-2026 Sam Blackburn
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -35,13 +35,11 @@ SOFTWARE.
 
 GeodesyFoundationClasses::CEarth::CEarth(Ellipsoid const ellipsoid_identifier )
 {
-   m_Initialize();
    SetEllipsoid( ellipsoid_identifier );
 }
 
 GeodesyFoundationClasses::CEarth::CEarth( GeodesyFoundationClasses::CEarth const& source )
 {
-   m_Initialize();
    Copy( source );
 }
 
@@ -129,7 +127,7 @@ void GeodesyFoundationClasses::CEarth::AddSurfaceDistanceAndDirectionToCoordinat
    double y{ 0.0 };
 
    double const direction_in_radians{ GeodesyFoundationClasses::CMath::ConvertDegreesToRadians(direction) };
-   constexpr double const eps{ 0.000000000000005 };
+   constexpr double const epsilon{ 0.000000000000005 };
    double const r{ 1.0 - m_Flattening };
    double const point_1_latitude_in_radians{ GeodesyFoundationClasses::CMath::ConvertDegreesToRadians(point_1.GetUpDownAngleInDegrees()) };
    double const point_1_longitude_in_radians{ GeodesyFoundationClasses::CMath::ConvertDegreesToRadians(point_1.GetLeftRightAngleInDegrees()) };
@@ -176,7 +174,7 @@ void GeodesyFoundationClasses::CEarth::AddSurfaceDistanceAndDirectionToCoordinat
       term_3 = ( ( term_2 * d ) / 4.0 ) - cz;
       y = ( term_3 * sine_of_y * d ) + tangent_u;
 
-      if (GeodesyFoundationClasses::CMath::AbsoluteValue( y - c ) > eps )
+      if (GeodesyFoundationClasses::CMath::AbsoluteValue( y - c ) > epsilon)
       {
          exit_loop = false;
       }
@@ -200,7 +198,7 @@ void GeodesyFoundationClasses::CEarth::AddSurfaceDistanceAndDirectionToCoordinat
 
    double const point_2_longitude_in_radians{ (point_1_longitude_in_radians + x) - ((1.0 - c) * d * m_Flattening) };
 
-   heading_from_point_2_to_point_1_in_radians = GeodesyFoundationClasses::CMath::ArcTangentOfYOverX( sa, heading_from_point_2_to_point_1_in_radians ) + CMath::Pi();
+   heading_from_point_2_to_point_1_in_radians = GeodesyFoundationClasses::CMath::ArcTangentOfYOverX( sa, heading_from_point_2_to_point_1_in_radians ) + std::numbers::pi;
 
    point_2.SetUpDownAngleInDegrees(GeodesyFoundationClasses::CMath::ConvertRadiansToDegrees( point_2_latitude_in_radians ) );
    point_2.SetLeftRightAngleInDegrees(GeodesyFoundationClasses::CMath::ConvertRadiansToDegrees( point_2_longitude_in_radians ) );
@@ -582,7 +580,7 @@ double GeodesyFoundationClasses::CEarth::GetSurfaceDistance( GeodesyFoundationCl
       }
    }
 
-   heading_from_point_2_to_point_1 = GeodesyFoundationClasses::CMath::ArcTangentOfYOverX( c_value_1 * sine_of_x, ( (heading_from_point_2_to_point_1 * cosine_of_x ) - ( s_value_1 * c_value_2 ) ) ) + CMath::Pi();
+   heading_from_point_2_to_point_1 = GeodesyFoundationClasses::CMath::ArcTangentOfYOverX( c_value_1 * sine_of_x, ( (heading_from_point_2_to_point_1 * cosine_of_x ) - ( s_value_1 * c_value_2 ) ) ) + std::numbers::pi;
 
    temp_decimal_degrees = GeodesyFoundationClasses::CMath::ConvertRadiansToDegrees( heading_from_point_2_to_point_1 );
 
@@ -633,17 +631,6 @@ double GeodesyFoundationClasses::CEarth::GetSurfaceDistance( GeodesyFoundationCl
    return( s );
 }
 
-void GeodesyFoundationClasses::CEarth::m_ComputeEccentricitySquared( void ) noexcept
-{
-   if ( m_Flattening == 0.0 )
-   {
-      m_EccentricitySquared = 0.0;
-      return;
-   }
-
-   m_EccentricitySquared = ( 2.0 * m_Flattening ) - ( m_Flattening * m_Flattening );
-}
-
 void GeodesyFoundationClasses::CEarth::m_ComputeFlattening( void ) noexcept
 {
    if ( m_EquatorialRadiusInMeters == 0.0 or m_PolarRadiusInMeters == 0.0 )
@@ -652,15 +639,6 @@ void GeodesyFoundationClasses::CEarth::m_ComputeFlattening( void ) noexcept
    }
 
    m_Flattening = GeodesyFoundationClasses::CMath::AbsoluteValue( m_EquatorialRadiusInMeters - m_PolarRadiusInMeters ) / m_EquatorialRadiusInMeters;
-}
-
-void GeodesyFoundationClasses::CEarth::m_Initialize( void ) noexcept
-{
-   m_EllipsoidID              = Ellipsoid::Unknown;
-   m_PolarRadiusInMeters      = 0.0;
-   m_EquatorialRadiusInMeters = 0.0;
-   m_Flattening               = 0.0;
-   m_EccentricitySquared      = 0.0;
 }
 
 void GeodesyFoundationClasses::CEarth::SetEllipsoid(Ellipsoid const ellipsoid_identifier) noexcept
